@@ -4,11 +4,19 @@
  */
 package GUI;
 
+import Custom.PanelBorder;
+import Custom.WrapLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,20 +36,42 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         loadCourse();
     }
     private void loadCourse(){
-        // this function is testing now
-        JPanel pane1= new JPanel();
-        JPanel pane2 = new JPanel();
-        JPanel pane3 = new JPanel();
-        jPanel2.setLayout(new BoxLayout(jPanel2,BoxLayout.Y_AXIS));
-        pane1.setMaximumSize(new Dimension(200,200));
-        pane2.setMaximumSize(new Dimension(200,200));
-        pane3.setMaximumSize(new Dimension(200,200));
-        pane1.setBackground(Color.red);
-        pane2.setBackground(Color.black);
-        pane3.setBackground(Color.green);
-        jPanel2.add(pane1);
-        jPanel2.add(pane2);
-        jPanel2.add(pane3);
+        // function for testing only
+        jPanel2.setLayout(new WrapLayout());
+        JPanel panelInfo = new JPanel();
+        GridLayout gridlayout = new GridLayout(3,1);
+        gridlayout.setHgap(0);
+        JPanel combinePanel = new JPanel(gridlayout);
+        combinePanel.setBackground(Color.red);
+        panelInfo.setLayout(new GridLayout(1,3));
+        panelInfo.setBackground(Color.red);
+        panelInfo.setPreferredSize(new Dimension(254,90));
+        JLabel id = new JLabel("Mã khóa: 1001");
+        JLabel name = new JLabel("Lập trình C");
+        JLabel tinchi = new JLabel ("Số tín chỉ: 4");
+        JLabel makhoa = new JLabel("Mã khoa: 7");
+        id.setFont(new Font("Segoe UI",Font.BOLD,12));
+        name.setFont(new Font("Segoe UI",Font.BOLD,12));
+        tinchi.setFont(new Font("Segoe UI",Font.BOLD,12));
+        makhoa.setFont(new Font("Segoe UI",Font.BOLD,12));
+        id.setForeground(Color.white);
+        name.setForeground(Color.white);
+        makhoa.setForeground(Color.white);
+        tinchi.setForeground(Color.white);
+        PanelBorder pb1 = new PanelBorder();
+        pb1.setLayout(new FlowLayout());
+        combinePanel.add(id);
+        combinePanel.add(name);
+        combinePanel.add(tinchi);
+        panelInfo.add(combinePanel);
+        panelInfo.add(makhoa);
+        pb1.setPreferredSize(new Dimension(254,90));
+        pb1.setBackground(Color.red);
+        pb1.add(panelInfo);
+        jPanel2.add(pb1);
+        combinePanel.setOpaque(false);
+        panelInfo.setOpaque(false);
+
     }
 
     /**
@@ -91,7 +121,25 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(200, 200));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(200, 200));
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 254, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 586, Short.MAX_VALUE)
+        );
+
         jScrollPane1.setViewportView(jPanel2);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,7 +150,7 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã khóa học", "Tên khóa học", "Số tín chỉ", "Mã khoa"
+                "Mã sinh viên", "Họ sinh viên", "Tên sinh viên", "Ngày vào khóa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -187,12 +235,12 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -259,7 +307,7 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -279,7 +327,7 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                             .addComponent(jButton4)
                             .addComponent(jButton5))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())

@@ -131,7 +131,7 @@ public class GUIMain extends javax.swing.JFrame {
         panelPara.setVisible(true);
         // add GUI con vào jDesktopPanel
         PanelSwitch.add(panelPara);
-        //
+        
     }
     /**
      * @param args the command line arguments
