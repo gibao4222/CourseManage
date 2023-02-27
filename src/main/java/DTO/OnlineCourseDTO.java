@@ -10,13 +10,14 @@ package DTO;
  */
 public class OnlineCourseDTO {
     private int courseID;
-    private String url;
+    private String title,url;
 
     public OnlineCourseDTO() {
     }
 
-    public OnlineCourseDTO(int courseID, String url) {
+    public OnlineCourseDTO(int courseID, String title, String url) {
         this.courseID = courseID;
+        this.title = title;
         this.url = url;
     }
 
@@ -26,6 +27,14 @@ public class OnlineCourseDTO {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {

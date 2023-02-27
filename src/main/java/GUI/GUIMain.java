@@ -5,6 +5,15 @@
 package GUI;
 
 import java.awt.Color;
+import BLL.StudentBLL;
+import DTO.StudentDTO;
+
+import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,13 +21,13 @@ import java.awt.Color;
  */
 public class GUIMain extends javax.swing.JFrame {
 
+    StudentBLL std = new StudentBLL();
     /**
      * Creates new form GUIMain
      */
-    public GUIMain() {
+    public GUIMain() throws SQLException {
         initComponents();
-        setBackground(new Color(0,0,0,0));
-
+        listStudent3();
     }
 
     /**
@@ -30,47 +39,39 @@ public class GUIMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBorder2 = new Custom.PanelBorder();
-        menu1 = new Custom.Menu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
-        panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
-        menu1.setLayout(menu1Layout);
-        menu1Layout.setHorizontalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 227, Short.MAX_VALUE)
-        );
-        menu1Layout.setVerticalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-        panelBorder2.setLayout(panelBorder2Layout);
-        panelBorder2Layout.setHorizontalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder2Layout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1053, Short.MAX_VALUE))
-        );
-        panelBorder2Layout.setVerticalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(104, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -107,13 +108,38 @@ public class GUIMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIMain().setVisible(true);
+                try {
+                    new GUIMain().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+    private void listStudent3() throws SQLException{
+        List list = (List) std.LoadStudent(1);
+        DefaultTableModel model = convertStudent(list);
+        jTable1.setModel(model);
+        
+    }
+    
+    private DefaultTableModel convertStudent(List list){
+        String[] columnNames ={"TT","PersonID","FirstName","LastName","EnrollmentDate"};
+        Object[][] data = new Object[list.size()][5];
+        for(int i = 0 ; i< list.size() ;i++){
+            StudentDTO s= (StudentDTO) list.get(i);
+            data[i][0] = i +1;
+            data[i][1] = s.getPersonID();
+            data[i][2]= s.getFirstName();
+            data[i][3] = s.getLastName();
+            data[i][4] = s.getEnrollmentDate();
+        }
+        DefaultTableModel model = new DefaultTableModel(data,columnNames);
+        return model;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Custom.Menu menu1;
-    private Custom.PanelBorder panelBorder2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
