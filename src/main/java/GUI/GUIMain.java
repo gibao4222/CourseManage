@@ -34,7 +34,9 @@ public class GUIMain extends javax.swing.JFrame {
 
         panelBorder2 = new Custom.PanelBorder();
         menu1 = new Custom.Menu();
-        jLabel1 = new javax.swing.JLabel();
+        lb_QLD = new javax.swing.JLabel();
+        lb_QLPC = new javax.swing.JLabel();
+        label_QLKH = new javax.swing.JLabel();
         PanelSwitch = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,13 +46,33 @@ public class GUIMain extends javax.swing.JFrame {
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Quản lý khóa học");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_QLD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lb_QLD.setForeground(new java.awt.Color(255, 255, 255));
+        lb_QLD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_QLD.setText("Quản lý điểm");
+        lb_QLD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lb_QLDMouseClicked(evt);
+            }
+        });
+
+        lb_QLPC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lb_QLPC.setForeground(new java.awt.Color(255, 255, 255));
+        lb_QLPC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_QLPC.setText("Quản lý phân công");
+        lb_QLPC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_QLPCMouseClicked(evt);
+            }
+        });
+
+        label_QLKH.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_QLKH.setForeground(new java.awt.Color(255, 255, 255));
+        label_QLKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_QLKH.setText("Quản lý khóa học");
+        label_QLKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_QLKHMouseClicked(evt);
             }
         });
 
@@ -60,15 +82,22 @@ public class GUIMain extends javax.swing.JFrame {
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_QLPC, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(lb_QLD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(label_QLKH, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(650, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(label_QLKH, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_QLD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_QLPC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(501, Short.MAX_VALUE))
         );
 
         PanelSwitch.setPreferredSize(new java.awt.Dimension(1056, 720));
@@ -114,10 +143,20 @@ public class GUIMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lb_QLDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLDMouseClicked
+        // TODO add your handling code here:
+        clickListenerLeftMenu(new QuanLyDiemGUI());
+    }//GEN-LAST:event_lb_QLDMouseClicked
+
+    private void lb_QLPCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLPCMouseClicked
+        // TODO add your handling code here:
+        clickListenerLeftMenu(new QuanLyPhanCongGUI());
+    }//GEN-LAST:event_lb_QLPCMouseClicked
+
+    private void label_QLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_QLKHMouseClicked
         // TODO add your handling code here:
         clickListenerLeftMenu(new QuanLyKhoaHocGUI());
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_label_QLKHMouseClicked
 
     private void clickListenerLeftMenu(JPanel panelPara){
         //hàm chung để chuyển cái GUI con
@@ -170,7 +209,9 @@ public class GUIMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane PanelSwitch;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label_QLKH;
+    private javax.swing.JLabel lb_QLD;
+    private javax.swing.JLabel lb_QLPC;
     private Custom.Menu menu1;
     private Custom.PanelBorder panelBorder2;
     // End of variables declaration//GEN-END:variables
