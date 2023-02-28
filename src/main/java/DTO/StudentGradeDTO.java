@@ -8,17 +8,18 @@ package DTO;
  *
  * @author Admin
  */
-public class StudentGrageDTO {
-    private int enrollmentID,courseID,studentID;
+public class StudentGradeDTO {
+    private int enrollmentID;
+    private String courseName,fullNameStudent;
     private double grade;
 
-    public StudentGrageDTO() {
+    public StudentGradeDTO() {
     }
 
-    public StudentGrageDTO(int enrollmentID, int courseID, int studentID, double grade) {
+    public StudentGradeDTO(int enrollmentID, String fullNameStudent, String courseName, double grade) {
         this.enrollmentID = enrollmentID;
-        this.courseID = courseID;
-        this.studentID = studentID;
+        this.courseName = courseName;
+        this.fullNameStudent = fullNameStudent;
         this.grade = grade;
     }
 
@@ -30,20 +31,20 @@ public class StudentGrageDTO {
         this.enrollmentID = enrollmentID;
     }
 
-    public int getCourseID() {
-        return courseID;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public int getStudentID() {
-        return studentID;
+    public String getFullNameStudent() {
+        return fullNameStudent;
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public void setFullNameStudent(String fullNameStudent) {
+        this.fullNameStudent = fullNameStudent;
     }
 
     public double getGrade() {

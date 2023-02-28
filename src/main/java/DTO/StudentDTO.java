@@ -10,20 +10,19 @@ import java.sql.Date;
  *
  * @author Admin
  */
-public class PersonDTO {
+public class StudentDTO {
     private int personID;
     private String lastName,firstName;
-    private Date hireDate, enrollmentDate;
+    private Date enrollmentDate;
 
-    public PersonDTO() {
-    }
-
-    public PersonDTO(int personID, String lastName, String firstName, Date hireDate, Date enrollmentDate) {
+    public StudentDTO(int personID, String lastName, String firstName, Date enrollmentDate) {
         this.personID = personID;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.hireDate = hireDate;
         this.enrollmentDate = enrollmentDate;
+    }
+
+    public StudentDTO() {
     }
 
     public int getPersonID() {
@@ -50,14 +49,6 @@ public class PersonDTO {
         this.firstName = firstName;
     }
 
-    public Date getHireDate() {
-        return hireDate;
-    }
-
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
-    }
-
     public Date getEnrollmentDate() {
         return enrollmentDate;
     }
@@ -65,6 +56,5 @@ public class PersonDTO {
     public void setEnrollmentDate(Date enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
-    
     
 }

@@ -10,16 +10,17 @@ import java.sql.Time;
  *
  * @author Admin
  */
-public class OneSiteCourseDTO {
+public class OnSiteCourseDTO {
     private int courseID;
-    private String location,days;
+    private String title,location,days;
     private Time time;
 
-    public OneSiteCourseDTO() {
+    public OnSiteCourseDTO() {
     }
 
-    public OneSiteCourseDTO(int courseID, String location, String days, Time time) {
+    public OnSiteCourseDTO(int courseID, String title, String location, String days, Time time) {
         this.courseID = courseID;
+        this.title = title;
         this.location = location;
         this.days = days;
         this.time = time;
@@ -33,6 +34,14 @@ public class OneSiteCourseDTO {
         this.courseID = courseID;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
     public String getLocation() {
         return location;
     }

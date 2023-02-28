@@ -5,9 +5,21 @@
 package GUI;
 
 import java.awt.Color;
+<<<<<<< HEAD
+import BLL.StudentBLL;
+import DTO.StudentDTO;
+
+import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+=======
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+>>>>>>> origin/master
 
 /**
  *
@@ -15,12 +27,17 @@ import javax.swing.JPanel;
  */
 public class GUIMain extends javax.swing.JFrame {
 
+    StudentBLL std = new StudentBLL();
     /**
      * Creates new form GUIMain
      */
-    public GUIMain() {
+    public GUIMain() throws SQLException {
         initComponents();
+<<<<<<< HEAD
+        listStudent3();
+=======
 //        setBackground(new Color(0,0,0,0));
+>>>>>>> origin/master
     }
 
     /**
@@ -32,18 +49,40 @@ public class GUIMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+=======
         panelBorder2 = new Custom.PanelBorder();
         menu1 = new Custom.Menu();
         lb_QLD = new javax.swing.JLabel();
         lb_QLPC = new javax.swing.JLabel();
         label_QLKH = new javax.swing.JLabel();
         PanelSwitch = new javax.swing.JDesktopPane();
+>>>>>>> origin/master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+<<<<<<< HEAD
+=======
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setName("frameMain\n"); // NOI18N
         setResizable(false);
+>>>>>>> origin/master
 
+<<<<<<< HEAD
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+=======
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_QLD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -127,16 +166,23 @@ public class GUIMain extends javax.swing.JFrame {
             .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PanelSwitch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+>>>>>>> origin/master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(104, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -202,17 +248,47 @@ public class GUIMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIMain().setVisible(true);
+                try {
+                    new GUIMain().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+    private void listStudent3() throws SQLException{
+        List list = (List) std.LoadStudent(1);
+        DefaultTableModel model = convertStudent(list);
+        jTable1.setModel(model);
+        
+    }
+    
+    private DefaultTableModel convertStudent(List list){
+        String[] columnNames ={"TT","PersonID","FirstName","LastName","EnrollmentDate"};
+        Object[][] data = new Object[list.size()][5];
+        for(int i = 0 ; i< list.size() ;i++){
+            StudentDTO s= (StudentDTO) list.get(i);
+            data[i][0] = i +1;
+            data[i][1] = s.getPersonID();
+            data[i][2]= s.getFirstName();
+            data[i][3] = s.getLastName();
+            data[i][4] = s.getEnrollmentDate();
+        }
+        DefaultTableModel model = new DefaultTableModel(data,columnNames);
+        return model;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+=======
     private javax.swing.JDesktopPane PanelSwitch;
     private javax.swing.JLabel label_QLKH;
     private javax.swing.JLabel lb_QLD;
     private javax.swing.JLabel lb_QLPC;
     private Custom.Menu menu1;
     private Custom.PanelBorder panelBorder2;
+>>>>>>> origin/master
     // End of variables declaration//GEN-END:variables
 }

@@ -12,13 +12,16 @@ package DTO;
  */
 public class CourseInstructorDTO {
     private int courseID, personID;
+    private String title, fullName;
 
     public CourseInstructorDTO() {
     }
 
-    public CourseInstructorDTO(int courseID, int personID) {
+    public CourseInstructorDTO(int courseID, int personID, String title, String fullName) {
         this.courseID = courseID;
         this.personID = personID;
+        this.title = title;
+        this.fullName = fullName;
     }
 
     public int getCourseID() {
@@ -37,4 +40,19 @@ public class CourseInstructorDTO {
         this.personID = personID;
     }
     
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 }
