@@ -5,6 +5,7 @@
 package DAL;
 
 import DTO.OnSiteCourseDTO;
+import DTO.OnlineCourseDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
