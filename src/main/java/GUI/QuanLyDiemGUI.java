@@ -4,18 +4,24 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import DTO.StudentGradeDTO;
+import BLL.StudentGradeBLL;
 /**
  *
  * @author ADMIN
  */
 public class QuanLyDiemGUI extends javax.swing.JPanel {
 
+    StudentGradeBLL s= new StudentGradeBLL();
     /**
      * Creates new form QuanLyDiemGUI
      */
-    public QuanLyDiemGUI() {
+    public QuanLyDiemGUI() throws SQLException {
         initComponents();
+        listSG();
     }
 
     /**
@@ -201,6 +207,25 @@ public class QuanLyDiemGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private DefaultTableModel convertSG(ArrayList list){
+        String[] columnNames = {"EnrollmentID","Course","Person","Grade"};
+        Object[][] data = new Object[list.size()][5];
+        for(int i=0;i<list.size();i++){
+            StudentGradeDTO s = (StudentGradeDTO) list.get(i);
+            data[i][0]=s.getEnrollmentID();
+            data[i][1]=s.getCourseName();
+            data[i][2]=s.getFullNameStudent();
+            data[i][3]=s.getGrade();
+        }
+        DefaultTableModel model = new DefaultTableModel(data,columnNames);
+        return model;
+    }
+    
+    private void listSG() throws SQLException{
+        ArrayList list = s.reaadStudentGrade();
+        DefaultTableModel model = convertSG(list);
+        jTable1.setModel(model);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

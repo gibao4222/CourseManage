@@ -4,7 +4,12 @@
  */
 package GUI;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +20,7 @@ public class GUIMain extends javax.swing.JFrame {
     /**
      * Creates new form GUIMain
      */
+    
     public GUIMain() {
         initComponents();
     }
@@ -137,20 +143,33 @@ public class GUIMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lb_QLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLKHMouseClicked
-        // TODO add your handling code here:
-        clickListenerLeftMenu(new QuanLyKhoaHocGUI());
+        try {
+            // TODO add your handling code here:
+            clickListenerLeftMenu(new QuanLyKhoaHocGUI());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lb_QLKHMouseClicked
 
     private void lb_QLDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLDMouseClicked
-        // TODO add your handling code here:
-        clickListenerLeftMenu(new QuanLyDiemGUI());
+        try {
+            // TODO add your handling code here:
+            clickListenerLeftMenu(new QuanLyDiemGUI());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lb_QLDMouseClicked
 
     private void lb_QLPCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLPCMouseClicked
-        // TODO add your handling code here:
-        clickListenerLeftMenu(new QuanLyPhanCongGUI());
+        try {
+            // TODO add your handling code here:
+            clickListenerLeftMenu(new QuanLyPhanCongGUI());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lb_QLPCMouseClicked
 
+    
     /**
      * @param args the command line arguments
      */

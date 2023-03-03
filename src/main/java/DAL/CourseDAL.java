@@ -21,7 +21,7 @@ public class CourseDAL extends connect{
         this.openConnection();
     }
     public ArrayList readCourse() throws SQLException{
-        String query = "SELECT * FROM Course";
+        String query = "SELECT CourseID, Title, Credits, Name FROM Course,Department WHERE Department.DepartmentID = Course.DepartmentID";
         ResultSet rs = this.doReadQuery(query);
         ArrayList List = new ArrayList();
         if(rs!=null)
@@ -30,8 +30,8 @@ public class CourseDAL extends connect{
                 CourseDTO s = new CourseDTO();
                 s.setCourseID(rs.getInt("CourseID"));
                 s.setTitle(rs.getString("Title"));
-                s.setCreadits(rs.getInt("Creadits"));
-                s.setDepartmantID(rs.getInt("DepartmentID"));
+                s.setCreadits(rs.getInt("Credits"));
+                s.setDepartmantID(rs.getString("Name"));
                 List.add(s);
             }
         }
@@ -42,7 +42,7 @@ public class CourseDAL extends connect{
         PreparedStatement p = this.con.prepareStatement(query);
         p.setString(1, s.getTitle());
         p.setInt(2,s.getCreadits());
-        p.setInt(3, s.getDepartmantID());
+        p.setString(3, s.getDepartmant());
         p.setInt(4, s.getCourseID());
         int rs = p.executeUpdate();
         return rs;
@@ -52,7 +52,7 @@ public class CourseDAL extends connect{
         PreparedStatement p = con.prepareStatement(query);
         p.setString(1, s.getTitle());
         p.setInt(2, s.getCreadits());
-        p.setInt(3, s.getDepartmantID());
+        p.setString(3, s.getDepartmant());
         int rs = p.executeUpdate();
         return rs;
     }
@@ -65,45 +65,45 @@ public class CourseDAL extends connect{
             p.setString(1, "%"+s.getCourseID()+"%");
         }
         else{
-            if(!s.getTitle().equals("") && s.getCreadits()==0 && s.getDepartmantID()==0){
+            if(!s.getTitle().equals("") && s.getCreadits()==0 && s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Title LIKE ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getTitle()+"%");
             }
-            else if(s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmantID()==0){
+            else if(s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Credits = ?";
             p = con.prepareStatement(query);
             p.setInt(1, s.getCreadits());
             }
-            else if(s.getTitle().equals("") && s.getCreadits()==0 && s.getDepartmantID()!=0){
-                query="SELECT * FROM course WHERE DepartmentID = ?";
+            else if(s.getTitle().equals("") && s.getCreadits()==0 && !s.getDepartmant().equals("")){
+                query="SELECT * FROM course WHERE course.DepartmentID = ?";
             p = con.prepareStatement(query);
-            p.setInt(1, s.getDepartmantID());
+            p.setString(1, s.getDepartmant());
             }
-            else if(!s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmantID()==0){
+            else if(!s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Title LIKE ? AND Credits = ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getTitle()+"%");
             p.setInt(2, s.getCreadits());
             }
-            else if(!s.getTitle().equals("") && s.getCreadits()==0 && s.getDepartmantID()!=0){
+            else if(!s.getTitle().equals("") && s.getCreadits()==0 && !s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Title LIKE ? AND DepartmentID = ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getTitle()+"%");
-            p.setInt(2, s.getDepartmantID());
+            p.setString(2, s.getDepartmant());
             }
-            else if(s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmantID()!=0){
+            else if(s.getTitle().equals("") && s.getCreadits()!=0 && !s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Credits = ? AND DepartmentID =?";
             p = con.prepareStatement(query);
             p.setInt(1, s.getCreadits());
-            p.setInt(2, s.getDepartmantID());
+            p.setString(2, s.getDepartmant());
             }
-            else if(!s.getTitle().equals("") && s.getCreadits()!=0 && s.getDepartmantID()!=0){
+            else if(!s.getTitle().equals("") && s.getCreadits()!=0 && !s.getDepartmant().equals("")){
                 query="SELECT * FROM course WHERE Title LIKE ? AND Credits = ? AND DepartmentID = ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getTitle()+"%");
             p.setInt(2, s.getCreadits());
-            p.setInt(3, s.getDepartmantID());
+            p.setString(3, s.getDepartmant());
             }
         }
         ResultSet rs = p.executeQuery();
@@ -114,7 +114,7 @@ public class CourseDAL extends connect{
                 s1.setCourseID(rs.getInt("CourseID"));
                 s1.setTitle(rs.getString("Title"));
                 s1.setCreadits(rs.getInt("Creadits"));
-                s1.setDepartmantID(rs.getInt("DepartmentID"));
+                s1.setDepartmantID(rs.getString("Name"));
                 List.add(s);
             }
         }

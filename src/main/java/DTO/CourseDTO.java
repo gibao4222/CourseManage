@@ -15,16 +15,16 @@ public class CourseDTO {
     Creadits: so tin chi
     DepartmentID: id khoa
     */
-    private int courseID, creadits, departmantID;
-    private String title;
+    private int courseID, creadits;
+    private String title,departmant;
 
     public CourseDTO() {
     }
 
-    public CourseDTO(int courseID, int creadits, int departmantID, String title) {
+    public CourseDTO(int courseID, int creadits, String departmant, String title) {
         this.courseID = courseID;
         this.creadits = creadits;
-        this.departmantID = departmantID;
+        this.departmant = departmant;
         this.title = title;
     }
 
@@ -44,12 +44,12 @@ public class CourseDTO {
         this.creadits = creadits;
     }
 
-    public int getDepartmantID() {
-        return departmantID;
+    public String getDepartmant() {
+        return departmant;
     }
 
-    public void setDepartmantID(int departmantID) {
-        this.departmantID = departmantID;
+    public void setDepartmantID(String departmant) {
+        this.departmant = departmant;
     }
 
     public String getTitle() {
