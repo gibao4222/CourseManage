@@ -40,7 +40,8 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         jPanel2.setLayout(new WrapLayout());
         cbKindCourse.setSelectedIndex(-1);
         listC();
-        loadListOnlineCourse();
+//        loadListOnlineCourse();
+        loadListOnSiteCourse();
     }
     private void loadListOnlineCourse() throws SQLException{
         ArrayList list = oc.readOnlineCourse1();
@@ -84,7 +85,7 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         combinePanel.add(tinchi);
         combinePanel.add(makhoa);
         panelInfo.add(combinePanel);
-        pb1.setPreferredSize(new Dimension(240,100));
+        pb1.setPreferredSize(new Dimension(220,100));
         pb1.setBackground(Color.red);
         pb1.add(panelInfo);
         jPanel2.add(pb1);
@@ -156,14 +157,10 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(200, 200));
-        jScrollPane1.setOpaque(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setAutoscrolls(true);
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.setMaximumSize(new java.awt.Dimension(200, 200));
-        jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
