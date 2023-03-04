@@ -16,5 +16,7 @@ public class OnlineCourseBLL {
     public ArrayList readOnlineCourse() throws SQLException{
         return s.readOnlineCourse();
     }
-            
+    public ArrayList readOnlineCourse1() throws SQLException{
+        return s.readOnlineCourse1();
+    }       
 }

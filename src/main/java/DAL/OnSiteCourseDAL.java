@@ -21,6 +21,23 @@ public class OnSiteCourseDAL extends connect{
         super();
         this.openConnection();
     }
+    public ArrayList readOnSiteCourse1() throws SQLException{
+        String query = "SELECT onsitecourse.CourseID, Title, Credits, Name FROM `onsitecourse`, `course`, `department`  WHERE  onsitecourse.CourseID = course.CourseID AND Department.DepartmentID = course.DepartmentID";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+                Object[] s = new Object[4];
+                s[0]=(rs.getInt("CourseID"));
+                s[1]=(rs.getString("Title"));
+                s[2]=(rs.getString("Credits"));
+                s[3]=(rs.getString("Name"));
+                List.add(s);
+            }
+        }
+        return List;
+    }
     public ArrayList readOnSiteCourse() throws SQLException{
         String query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `onsitecourse`, `course` WHERE onsitecourse.CourseID = course.CourseID";
         ResultSet rs = this.doReadQuery(query);

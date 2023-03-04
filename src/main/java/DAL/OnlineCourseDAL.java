@@ -19,6 +19,23 @@ public class OnlineCourseDAL extends connect{
         super();
         this.openConnection();
     }
+    public ArrayList readOnlineCourse1() throws SQLException{
+        String query = "SELECT onlinecourse.CourseID, Title, Credits, Name FROM `onlinecourse`, `course`, `department`  WHERE  onlinecourse.CourseID = course.CourseID AND Department.DepartmentID = course.DepartmentID";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+                Object[] s = new Object[4];
+                s[0]=(rs.getInt("CourseID"));
+                s[1]=(rs.getString("Title"));
+                s[2]=(rs.getString("Credits"));
+                s[3]=(rs.getString("Name"));
+                List.add(s);
+            }
+        }
+        return List;
+    }
     public ArrayList readOnlineCourse() throws SQLException{
         String query = "SELECT onlinecourse.CourseID, Title, url FROM `onlinecourse`, `course` WHERE onlinecourse.CourseID = course.CourseID";
         ResultSet rs = this.doReadQuery(query);

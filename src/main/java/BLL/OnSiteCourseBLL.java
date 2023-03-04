@@ -11,9 +11,12 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class OnSiteCourse {
+public class OnSiteCourseBLL {
     OnSiteCourseDAL s = new OnSiteCourseDAL();
     public ArrayList readOnSiteCourse() throws SQLException{
         return s.readOnSiteCourse();
+    }
+    public ArrayList readOnSiteCourse1() throws SQLException{
+        return s.readOnSiteCourse1();
     }
 }

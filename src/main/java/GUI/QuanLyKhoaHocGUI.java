@@ -7,24 +7,20 @@ package GUI;
 import Custom.PanelBorder;
 import Custom.WrapLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import DTO.CourseDTO;
 import BLL.CourseBLL;
+import BLL.OnlineCourseBLL;
+import BLL.OnSiteCourseBLL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -32,30 +28,47 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
 
-    CourseBLL s = new CourseBLL();
+    CourseBLL c = new CourseBLL();
+    OnlineCourseBLL oc = new OnlineCourseBLL();
+    OnSiteCourseBLL osc = new OnSiteCourseBLL();
+    DefaultTableModel model;
     /**
      * Creates new form QuanLyKhoaHocGUI
      */
-    public QuanLyKhoaHocGUI() throws SQLException {
+    public QuanLyKhoaHocGUI() throws SQLException{
         initComponents();
-        loadCourse();
-        listC();
-    }
-    private void loadCourse(){
-        // function for testing only
         jPanel2.setLayout(new WrapLayout());
+        cbKindCourse.setSelectedIndex(-1);
+        listC();
+        loadListOnlineCourse();
+    }
+    private void loadListOnlineCourse() throws SQLException{
+        ArrayList list = oc.readOnlineCourse1();
+        for(int i=0;i<list.size();i++){
+            Object[] s = (Object[]) list.get(i);
+            CreatePanel(s);
+        }
+    }
+    private void loadListOnSiteCourse() throws SQLException{
+        ArrayList list = osc.readOnSiteCourse1();
+        for(int i=0;i<list.size();i++){
+            Object[] s = (Object[]) list.get(i);
+            CreatePanel(s);
+        }
+    }
+    private void CreatePanel(Object[] s){
         JPanel panelInfo = new JPanel();
-        GridLayout gridlayout = new GridLayout(3,1);
+        GridLayout gridlayout = new GridLayout(0,1);
         gridlayout.setHgap(0);
         JPanel combinePanel = new JPanel(gridlayout);
         combinePanel.setBackground(Color.red);
-        panelInfo.setLayout(new GridLayout(1,3));
+        panelInfo.setLayout(new GridLayout(0,1));
         panelInfo.setBackground(Color.red);
-        panelInfo.setPreferredSize(new Dimension(254,90));
-        JLabel id = new JLabel("Mã khóa: 1001");
-        JLabel name = new JLabel("Lập trình C");
-        JLabel tinchi = new JLabel ("Số tín chỉ: 4");
-        JLabel makhoa = new JLabel("Mã khoa: 7");
+        panelInfo.setPreferredSize(new Dimension(200,90));
+        JLabel id = new JLabel("ID: "+String.valueOf(s[0]));
+        JLabel name = new JLabel("Course Name: "+String.valueOf(s[1]));
+        JLabel tinchi = new JLabel ("Credits: "+String.valueOf(s[2]));
+        JLabel makhoa = new JLabel("Department: "+String.valueOf(s[3]));
         id.setFont(new Font("Segoe UI",Font.BOLD,12));
         name.setFont(new Font("Segoe UI",Font.BOLD,12));
         tinchi.setFont(new Font("Segoe UI",Font.BOLD,12));
@@ -69,16 +82,16 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         combinePanel.add(id);
         combinePanel.add(name);
         combinePanel.add(tinchi);
+        combinePanel.add(makhoa);
         panelInfo.add(combinePanel);
-        panelInfo.add(makhoa);
-        pb1.setPreferredSize(new Dimension(254,90));
+        pb1.setPreferredSize(new Dimension(240,100));
         pb1.setBackground(Color.red);
         pb1.add(panelInfo);
         jPanel2.add(pb1);
-        combinePanel.setOpaque(false);
-        panelInfo.setOpaque(false);
-
+//        combinePanel.setOpaque(false);
+//        panelInfo.setOpaque(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,22 +102,22 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_OnlineCourse = new javax.swing.JButton();
+        btn_OnSiteCourse = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txt_CourseID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_CourseName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txt_Credits = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_Add = new javax.swing.JButton();
+        btn_Update = new javax.swing.JButton();
+        btn_Delete = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -114,33 +127,41 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cbKindCourse = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtDays = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtURL = new javax.swing.JTextField();
+        txt_DepartmentID = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Khóa học Online");
-
-        jButton2.setText("Khóa học Offline");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_OnlineCourse.setText("Khóa học Online");
+        btn_OnlineCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_OnlineCourseActionPerformed(evt);
+            }
+        });
+
+        btn_OnSiteCourse.setText("Khóa học Offline");
+        btn_OnSiteCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_OnSiteCourseActionPerformed(evt);
             }
         });
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(200, 200));
+        jScrollPane1.setOpaque(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setAutoscrolls(true);
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setMaximumSize(new java.awt.Dimension(200, 200));
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
 
@@ -152,7 +173,7 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addGap(0, 582, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -176,6 +197,11 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -184,25 +210,30 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jTextField1.setEnabled(false);
+        txt_CourseID.setEnabled(false);
 
         jLabel1.setText("Mã khóa học");
 
         jLabel2.setText("Tên khóa học");
 
-        jTextField2.setEnabled(false);
+        txt_CourseName.setEnabled(false);
 
         jLabel3.setText("Số tín chỉ");
 
-        jTextField3.setEnabled(false);
+        txt_Credits.setEnabled(false);
 
         jLabel4.setText("Mã Khoa");
 
-        jButton3.setText("Thêm");
+        btn_Add.setText("Thêm");
+        btn_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AddActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Sửa");
+        btn_Update.setText("Sửa");
 
-        jButton5.setText("Xóa");
+        btn_Delete.setText("Xóa");
 
         jTextField4.setText("Tìm kiếm khóa học....");
 
@@ -248,20 +279,20 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Offline", "Online" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        cbKindCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Offline", "Online" }));
+        cbKindCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                cbKindCourseActionPerformed(evt);
             }
         });
 
         jLabel10.setText("Loại khóa học");
 
-        jTextField5.setEnabled(false);
+        txtLocation.setEnabled(false);
 
         jLabel11.setText("Vị trí");
 
-        jTextField6.setEnabled(false);
+        txtDays.setEnabled(false);
 
         jLabel12.setText("Các ngày học");
 
@@ -269,9 +300,9 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
 
         jLabel14.setText("URL online");
 
-        jTextField7.setEnabled(false);
+        txtURL.setEnabled(false);
 
-        jTextField8.setEnabled(false);
+        txt_DepartmentID.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -281,12 +312,17 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btn_OnlineCourse)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(btn_OnSiteCourse))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE))
+                        .addGap(0, 131, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -297,69 +333,62 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                                 .addGap(236, 236, 236)
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 135, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(0, 59, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_CourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
                                                 .addGap(48, 48, 48)))
                                         .addGap(60, 60, 60)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_CourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
                                                 .addGap(47, 47, 47)))
                                         .addGap(32, 32, 32))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtURL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel14)))
-                                        .addGap(145, 145, 145)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(59, 59, 59))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(96, 96, 96)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtLocation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11))
+                                        .addGap(74, 74, 74)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDays, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(jLabel13))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel3)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txt_Credits, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(44, 44, 44)
+                                                .addComponent(jLabel4))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(42, 42, 42)
+                                                .addComponent(txt_DepartmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(42, 42, 42)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(46, 46, 46)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel10)
-                                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel12))
-                                        .addGap(63, 63, 63)
-                                        .addComponent(jLabel13)))
-                                .addGap(24, 24, 24)))
-                        .addContainerGap())
+                                            .addComponent(cbKindCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(104, 104, 104))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
-                        .addComponent(jButton5)
-                        .addGap(123, 123, 123))))
+                        .addComponent(btn_Delete)
+                        .addGap(248, 248, 248))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,17 +401,14 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btn_OnlineCourse)
+                    .addComponent(btn_OnSiteCourse)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -391,46 +417,99 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_CourseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_CourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Credits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbKindCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_DepartmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13))
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel13))
+                                        .addGap(5, 5, 5)
+                                        .addComponent(txtDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel14)
                                 .addGap(5, 5, 5)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(104, 104, 104)
+                                .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))
+                            .addComponent(btn_Add)
+                            .addComponent(btn_Update)
+                            .addComponent(btn_Delete))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 38, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_OnSiteCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OnSiteCourseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        jPanel2.removeAll();
+        try {
+            loadListOnSiteCourse();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyKhoaHocGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_OnSiteCourseActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void cbKindCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKindCourseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+        if(cbKindCourse.getSelectedIndex()==-1){
+            
+        }
+        else if(cbKindCourse.getSelectedItem().equals("Online")){
+            txtURL.setEnabled(true);
+            txtLocation.setEnabled(false);
+            txtDays.setEnabled(false);
+        }
+        else{
+            txtURL.setEnabled(false);
+            txtLocation.setEnabled(true);
+            txtDays.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbKindCourseActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int i = jTable1.getSelectedRow();
+        if(i>=0){
+            txt_CourseID.setText(model.getValueAt(i, 1).toString());
+            txt_CourseName.setText(model.getValueAt(i, 2).toString());
+            txt_Credits.setText(model.getValueAt(i, 3).toString());
+            txt_DepartmentID.setText(model.getValueAt(i, 4).toString());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btn_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_AddActionPerformed
+
+    private void btn_OnlineCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OnlineCourseActionPerformed
+        // TODO add your handling code here:
+        //jPanel2.removeAll();
+        try {
+            loadListOnlineCourse();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyKhoaHocGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_OnlineCourseActionPerformed
 
     private DefaultTableModel convertC(ArrayList list){
         String[] columnNames = {"TT","CourseID","Title","Credits","Department"};
@@ -448,22 +527,22 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
     }
     
     private void listC() throws SQLException{
-        ArrayList list = s.readCourse();
-        DefaultTableModel model = convertC(list);
+        ArrayList list = c.readCourse();
+        model = convertC(list);
         jTable1.setModel(model);
 }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btn_Add;
+    private javax.swing.JButton btn_Delete;
+    private javax.swing.JButton btn_OnSiteCourse;
+    private javax.swing.JButton btn_OnlineCourse;
+    private javax.swing.JButton btn_Update;
+    private javax.swing.JComboBox<String> cbKindCourse;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -483,13 +562,13 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField txtDays;
+    private javax.swing.JTextField txtLocation;
+    private javax.swing.JTextField txtURL;
+    private javax.swing.JTextField txt_CourseID;
+    private javax.swing.JTextField txt_CourseName;
+    private javax.swing.JTextField txt_Credits;
+    private javax.swing.JTextField txt_DepartmentID;
     // End of variables declaration//GEN-END:variables
 }
