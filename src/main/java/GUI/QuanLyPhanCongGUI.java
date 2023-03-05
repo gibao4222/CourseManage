@@ -30,6 +30,9 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         initComponents();
         listCI();
         loadTenGiangVienCBB();
+        loadTenKhoaHocCBB();
+        cbbMaGiangVien.setSelectedIndex(-1);
+        cbbMaKhoaHoc.setSelectedIndex(-1);
     }
 
     /**
@@ -139,6 +142,18 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         txtTenKhoaHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenKhoaHocActionPerformed(evt);
+            }
+        });
+
+        cbbMaGiangVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaGiangVienActionPerformed(evt);
+            }
+        });
+
+        cbbMaKhoaHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaKhoaHocActionPerformed(evt);
             }
         });
 
@@ -253,8 +268,19 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTenKhoaHocActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            CourseInstructorDTO ci = new CourseInstructorDTO(Integer.parseInt(txtMaKhoaHoc.getText()),Integer.parseInt(txtMaGiangVien.getText()), "", "");
+            boolean isExist = s.isExistRecord(ci);
+            if(isExist)
+                JOptionPane.showMessageDialog(btnThem, "Giảng viên đã được phân công khóa này rồi, vui lòng chọn khóa khác");
+            else{
+                listCI();
+                JOptionPane.showMessageDialog(btnThem, "Phân công thành công");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyTyped
@@ -333,19 +359,58 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        try {
+        if(jTable1.getSelectionModel().isSelectionEmpty() == true)
+            JOptionPane.showMessageDialog(btnThem, "Vui lòng chọn khóa học để xóa");
+        else{
+            try {
             // TODO add your handling code here:
-            CourseInstructorDTO ci = new CourseInstructorDTO(Integer.parseInt(txtMaKhoaHoc.getText()), Integer.parseInt(txtMaGiangVien.getText()),txtMaKhoaHoc.getText(), txtMaGiangVien.getText());
-            s.deleteCourseInstructor(ci);
-            listCI();
-        } catch (SQLException ex) {
-            Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+                CourseInstructorDTO ci = new CourseInstructorDTO(Integer.parseInt(txtMaKhoaHoc.getText()), Integer.parseInt(txtMaGiangVien.getText()),txtMaKhoaHoc.getText(), txtMaGiangVien.getText());
+                s.deleteCourseInstructor(ci);
+                listCI();
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void cbbMaGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaGiangVienActionPerformed
+        // TODO add your handling code here:
+        if(cbbMaGiangVien.getSelectedIndex()==-1){
+            
+        }
+        else
+        {
+            try {
+                int result = s.getIdInstructorFromFullname(cbbMaGiangVien.getSelectedItem().toString());
+                txtMaGiangVien.setText(Integer.toString(result));
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cbbMaGiangVienActionPerformed
+
+    private void cbbMaKhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaKhoaHocActionPerformed
+        // TODO add your handling code here:
+        if(cbbMaKhoaHoc.getSelectedIndex()==-1){
+            
+        }
+        else
+        {
+            try {
+                int result = s.getIdCourserFromTitle(cbbMaKhoaHoc.getSelectedItem().toString());
+                txtMaKhoaHoc.setText(Integer.toString(result));
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cbbMaKhoaHocActionPerformed
+
     private void loadTenGiangVienCBB() throws SQLException{
-        for(int i=0;i<s.readCourseInstructor().size();i++)
-            cbbMaGiangVien.addItem(s.readCourseInstructor().get(i).toString());
+        cbbMaGiangVien.setModel(new DefaultComboBoxModel<String>((String[]) s.readNameCourseInstructor().toArray(new String[0])));
+    }
+    
+    private void loadTenKhoaHocCBB() throws SQLException{
+        cbbMaKhoaHoc.setModel(new DefaultComboBoxModel<String>((String[]) s.readTitleCourseInstructor().toArray(new String[0])));
     }
     private DefaultTableModel convertCI(ArrayList list){
         String[] columnNames = {"TT","CourseID","Title","PersonID","FullName"};

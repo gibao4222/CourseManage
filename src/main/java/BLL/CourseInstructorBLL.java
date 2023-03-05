@@ -28,5 +28,20 @@ public class CourseInstructorBLL {
     public ArrayList readNameCourseInstructor() throws SQLException{
         return s.readNameCourseInstructor();
     }
+    public int getIdInstructorFromFullname(String name) throws SQLException{
+        return s.getIdInstructorFromFullname(name);
+    }
+    
+    public int getIdCourserFromTitle(String name) throws SQLException{
+        return s.getIdCourserFromTitle(name);
+    }
+    
+    public ArrayList readTitleCourseInstructor() throws SQLException{
+        return s.readTitleCourseInstructor();
+    }
+    
+    public boolean isExistRecord(CourseInstructorDTO ci) throws SQLException{
+        return s.isExistRecord(ci);
+    }
     
 }

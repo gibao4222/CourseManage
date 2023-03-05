@@ -44,9 +44,46 @@ public class CourseInstructorDAL extends connect{
         if(rs!=null)
         {
             while(rs.next()){
-                CourseInstructorDTO s = new CourseInstructorDTO();
-                s.setFullName(rs.getString("FullName"));
-                List.add(s);
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getString(1));
+            }
+        }
+        return List;
+    }
+    
+    public int getIdInstructorFromFullname(String name) throws SQLException{
+        String query = String.format("SELECT person.PersonID FROM person WHERE person.Firstname IN (SELECT\n" +
+"    SUBSTRING_INDEX(SUBSTRING_INDEX('%s' , ' ', 1), ' ', -1) AS first_name)\n" +
+"    AND person.Lastname IN (SELECT TRIM( SUBSTR('%s ', LOCATE(' ', '%s' )) ) AS last_name)",name,name,name );
+        ResultSet rs = this.doReadQuery(query);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else
+            return 0;
+    }
+    
+    public int getIdCourserFromTitle(String name) throws SQLException{
+        String query = String.format("SELECT course.CourseID from course WHERE course.Title = '%s' ",name);
+        ResultSet rs = this.doReadQuery(query);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else
+            return 0;
+    }
+    
+    public ArrayList readTitleCourseInstructor() throws SQLException{
+        String query = "SELECT course.Title from course";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getString(1));
             }
         }
         return List;
@@ -60,6 +97,17 @@ public class CourseInstructorDAL extends connect{
         p.setInt(4, sOld.getPersonID());
         int rs = p.executeUpdate();
         return rs;
+    }
+    
+    public boolean isExistRecord(CourseInstructorDTO s) throws SQLException{
+        String query = String.format("SELECT courseinstructor.CourseID,courseinstructor.PersonID from courseinstructor WHERE courseinstructor.CourseID = %d AND courseinstructor.PersonID = %d ", s.getCourseID(),s.getPersonID());
+        ResultSet rs = this.doReadQuery(query);
+        if(rs.next())
+            return true;
+        else{
+            insertCourseInstructor(s);
+            return false;
+        }
     }
     public int insertCourseInstructor(CourseInstructorDTO s) throws SQLException{
         String query = "Insert courseinstructor (CourseID,PersonID) VALUES(?,?)";
