@@ -36,6 +36,21 @@ public class CourseInstructorDAL extends connect{
         }
         return List;
     }
+    
+    public ArrayList readNameCourseInstructor() throws SQLException{
+        String query = "SELECT concat(person.Firstname,' ',person.Lastname) as FullName FROM person,courseinstructor WHERE person.PersonID = courseinstructor.PersonID";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+                CourseInstructorDTO s = new CourseInstructorDTO();
+                s.setFullName(rs.getString("FullName"));
+                List.add(s);
+            }
+        }
+        return List;
+    }
     public int updateCourseInstructor(CourseInstructorDTO sOld, CourseInstructorDTO sNew) throws SQLException{
         String query ="Update courseinstructor SET CourseID=?,PersonID=? WHERE CourseID = ? AND PersonID = ?";
         PreparedStatement p = this.con.prepareStatement(query);
@@ -54,26 +69,27 @@ public class CourseInstructorDAL extends connect{
         int rs = p.executeUpdate();
         return rs;
     }
-    public int deleteCourseInstructor(CourseInstructorDTO s) throws SQLException{
-        String query = "DELETE FROM courseinstructor WHERE CourseID=? AND PersonID=?";
+    public void deleteCourseInstructor(CourseInstructorDTO s) throws SQLException{
+        String query = String.format("DELETE from courseinstructor WHERE courseinstructor.PersonID = %d AND courseinstructor.CourseID = %d",s.getCourseID(),s.getPersonID());
         PreparedStatement p = con.prepareStatement(query);
-        p.setInt(1, s.getCourseID());
-        p.setInt(2, s.getPersonID());
-        int rs = p.executeUpdate();
-        return rs;
+//        p.setString(1, Integer.toString(s.getCourseID()));
+//        p.setString(2, Integer.toString(s.getPersonID()));
+        int rs = p.executeUpdate(query);
     }
     public ArrayList findCourseInstructor (CourseInstructorDTO s) throws SQLException{
         String query="";
         PreparedStatement p = null;
         if(s.getCourseID()!=0 && s.getPersonID()==0 && s.getTitle().equals("") && s.getFullName().equals("")){
-            query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.CourseID=?";
+            query = "SELECT courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName,courseinstructor.CourseID, course.Title  FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.CourseID LIKE ?";
+//query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.CourseID=?";
             p = con.prepareStatement(query);
-            p.setInt(1, s.getCourseID());
+            p.setString(1, "%"+s.getCourseID()+"%");
         }
         else if(s.getCourseID()==0 && s.getPersonID()!=0 && s.getTitle().equals("") && s.getFullName().equals("")){
-            query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.PersonID=?";
+            query = "SELECT courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName,courseinstructor.CourseID, course.Title  FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.PersonID=?";
+//query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.PersonID=?";
             p = con.prepareStatement(query);
-            p.setInt(2, s.getPersonID());
+            p.setInt(1, s.getPersonID());
         }
         else if(s.getCourseID()!=0 && s.getPersonID()!=0 && s.getTitle().equals("") && s.getFullName().equals("")){
             query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND courseinstructor.CourseID=? AND courseinstructor.PersonID=?";
@@ -83,12 +99,14 @@ public class CourseInstructorDAL extends connect{
 
         }
         else if(!s.getTitle().equals("") && s.getFullName().equals("")){
-            query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND Title LIKE ?";
+            query = "SELECT courseinstructor.PersonID,CONCAT(FirstName,' ',LastName) AS FullName,courseinstructor.CourseID,course.Title  FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND course.Title like ?";
+//query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND Title LIKE ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getTitle()+"%");
         }
         else if(s.getTitle().equals("") && !s.getFullName().equals("")){
-            query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND CONCAT(FirstName,' ',LastName) LIKE ?";
+            query = "SELECT courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName, courseinstructor.CourseID, course.Title  FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND courseinstructor.PersonID = person.PersonID AND CONCAT(FirstName,' ',LastName) LIKE ?";
+//            query="SELECT courseinstructor.CourseID, Title,courseinstructor.PersonID, CONCAT(FirstName,' ',LastName) AS FullName FROM `courseinstructor`, `course`,`person` WHERE courseinstructor.CourseID = course.CourseID AND CONCAT(FirstName,' ',LastName) LIKE ?";
             p = con.prepareStatement(query);
             p.setString(1, "%"+s.getFullName()+"%");
         }
