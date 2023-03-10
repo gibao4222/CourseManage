@@ -373,6 +373,9 @@
             <Property name="roundTopLeft" type="int" value="10"/>
             <Property name="roundTopRight" type="int" value="10"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="Custom.ButtonRadius" name="btnXoa">
           <Properties>

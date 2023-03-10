@@ -253,19 +253,6 @@ public class QuanLyKhoaHocGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseMotionListener(new MouseMotionListener() {
-            public void mouseDragged(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point p = e.getPoint();
-                int y = p.y / jTable1.getRowHeight();
-                if(y < jTable1.getModel().getRowCount())
-                jTable1.setRowSelectionInterval(0, y);
-            }
-        });
         jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jTable1.setSelectionBackground(new java.awt.Color(102, 153, 255));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {

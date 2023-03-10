@@ -81,22 +81,26 @@ public class OnlineCourseDAL extends connect{
         String query="";
         PreparedStatement p = null;
         if(str.equals("Mã khóa học")){
-            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` WHERE course.CourseID=onlinecourse.CourseID AND onlinecourse.CourseID LIKE ?";
+            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` "
+                    + "WHERE course.CourseID=onlinecourse.CourseID AND onlinecourse.CourseID LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }
         else if(str.equals("Tên khóa học")){
-            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` WHERE course.CourseID=onlinecourse.CourseID AND course.Title LIKE ?";
+            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` "
+                    + "WHERE course.CourseID=onlinecourse.CourseID AND course.Title LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }
         else if(str.equals("Số tín chỉ")){
-            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` WHERE course.CourseID=onlinecourse.CourseID AND Credits=?";
+            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse` "
+                    + "WHERE course.CourseID=onlinecourse.CourseID AND Credits=?";
             p=con.prepareStatement(query); 
             p.setInt(1, Integer.parseInt(value));
         }
         else{
-            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse`, `department`  WHERE course.CourseID=onlinecourse.CourseID AND course.DepartmentID = department.DepartmentID AND department.Name LIKE ?";
+            query = "SELECT onlinecourse.CourseID, Title, url FROM `course`, `onlinecourse`, `department`  "
+                    + "WHERE course.CourseID=onlinecourse.CourseID AND course.DepartmentID = department.DepartmentID AND department.Name LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }

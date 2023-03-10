@@ -21,8 +21,8 @@ public class CourseInstructorBLL {
         return s.findCourseInstructor(ci);
     }
     
-    public void deleteCourseInstructor(CourseInstructorDTO ci) throws SQLException{
-        s.deleteCourseInstructor(ci);
+    public int deleteCourseInstructor(CourseInstructorDTO ci) throws SQLException{
+        return s.deleteCourseInstructor(ci);
     }
     
     public ArrayList readNameCourseInstructor() throws SQLException{
@@ -42,6 +42,10 @@ public class CourseInstructorBLL {
     
     public boolean isExistRecord(CourseInstructorDTO ci) throws SQLException{
         return s.isExistRecord(ci);
+    }
+    
+    public int updateCourseInstructor(CourseInstructorDTO sOld, CourseInstructorDTO sNew) throws SQLException{
+        return s.updateCourseInstructor(sOld, sNew);
     }
     
 }

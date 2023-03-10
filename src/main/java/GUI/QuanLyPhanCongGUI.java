@@ -195,6 +195,11 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         btnSua.setRoundBottomRight(10);
         btnSua.setRoundTopLeft(10);
         btnSua.setRoundTopRight(10);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
@@ -373,6 +378,8 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         model = (DefaultTableModel) jTable1.getModel();
         int i = jTable1.getSelectedRow();
         if(i>=0){
+            sOld.setCourseID(Integer.parseInt(model.getValueAt(i, 1).toString()));
+            sOld.setPersonID(Integer.parseInt(model.getValueAt(i, 3).toString()));
             txtMaGiangVien.setText(model.getValueAt(i, 3).toString());
             cbbTenGiangVien.setSelectedItem(model.getValueAt(i, 4).toString());
             cbbTenKhoaHoc.setSelectedItem(model.getValueAt(i, 2).toString());
@@ -445,14 +452,40 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         else{
             try {
             // TODO add your handling code here:
-                CourseInstructorDTO ci = new CourseInstructorDTO(Integer.parseInt(txtMaKhoaHoc.getText()), Integer.parseInt(txtMaGiangVien.getText()),txtMaKhoaHoc.getText(), txtMaGiangVien.getText());
-                s.deleteCourseInstructor(ci);
-                listCI();
+                CourseInstructorDTO ci = new CourseInstructorDTO();
+                ci.setCourseID(Integer.parseInt(txtMaKhoaHoc.getText()));
+                ci.setPersonID(Integer.parseInt(txtMaGiangVien.getText()));
+                if(s.deleteCourseInstructor(ci)==0){
+                    JOptionPane.showMessageDialog(this, "Delete failed");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Delete success");
+                    listCI();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    CourseInstructorDTO sOld = new CourseInstructorDTO();
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        CourseInstructorDTO sNew = new CourseInstructorDTO();
+        sNew.setCourseID(Integer.parseInt(txtMaKhoaHoc.getText()));
+        sNew.setPersonID(Integer.parseInt(txtMaGiangVien.getText()));
+        try {
+            if(s.updateCourseInstructor(sOld, sNew)==0){
+                JOptionPane.showMessageDialog(this, "Update failed");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Update success");
+                 listCI();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void loadTenGiangVienCBB() throws SQLException{
         cbbTenGiangVien.setModel(new DefaultComboBoxModel<String>((String[]) s.readNameCourseInstructor().toArray(new String[0])));

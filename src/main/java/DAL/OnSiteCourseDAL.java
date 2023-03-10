@@ -90,22 +90,26 @@ public class OnSiteCourseDAL extends connect{
         String query="";
         PreparedStatement p = null;
         if(str.equals("Mã khóa học")){
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND onsitecourse.CourseID LIKE ?";
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` "
+                    + "WHERE course.CourseID=onsitecourse.CourseID AND onsitecourse.CourseID LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }
         else if(str.equals("Tên khóa học")){
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND course.Title LIKE ?";
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` "
+                    + "WHERE course.CourseID=onsitecourse.CourseID AND course.Title LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }
         else if(str.equals("Số tín chỉ")){
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND Credits=?";
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` "
+                    + "WHERE course.CourseID=onsitecourse.CourseID AND Credits=?";
             p=con.prepareStatement(query); 
             p.setInt(1, Integer.parseInt(value));
         }
         else{
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse`, `department`  WHERE course.CourseID=onsitecourse.CourseID AND course.DepartmentID = department.DepartmentID AND department.Name LIKE ?";
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse`, `department`  "
+                    + "WHERE course.CourseID=onsitecourse.CourseID AND course.DepartmentID = department.DepartmentID AND department.Name LIKE ?";
             p=con.prepareStatement(query); 
             p.setString(1, "%"+value+"%");
         }

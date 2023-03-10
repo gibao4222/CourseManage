@@ -38,7 +38,7 @@ public class CourseInstructorDAL extends connect{
     }
     
     public ArrayList readNameCourseInstructor() throws SQLException{
-        String query = "SELECT concat(person.Firstname,' ',person.Lastname) as FullName FROM person,courseinstructor WHERE person.PersonID = courseinstructor.PersonID";
+        String query = "SELECT concat(person.Firstname,' ',person.Lastname) as FullName FROM person,courseinstructor WHERE person.PersonID = courseinstructor.PersonID GROUP BY FullName";
         ResultSet rs = this.doReadQuery(query);
         ArrayList List = new ArrayList();
         if(rs!=null)
@@ -117,12 +117,13 @@ public class CourseInstructorDAL extends connect{
         int rs = p.executeUpdate();
         return rs;
     }
-    public void deleteCourseInstructor(CourseInstructorDTO s) throws SQLException{
-        String query = String.format("DELETE from courseinstructor WHERE courseinstructor.PersonID = %d AND courseinstructor.CourseID = %d",s.getCourseID(),s.getPersonID());
+    public int deleteCourseInstructor(CourseInstructorDTO s) throws SQLException{
+        String query ="DELETE from courseinstructor WHERE courseinstructor.PersonID = ? AND courseinstructor.CourseID = ?";
         PreparedStatement p = con.prepareStatement(query);
-//        p.setString(1, Integer.toString(s.getCourseID()));
-//        p.setString(2, Integer.toString(s.getPersonID()));
-        int rs = p.executeUpdate(query);
+        p.setInt(2, s.getCourseID());
+        p.setInt(1, s.getPersonID());
+        int rs = p.executeUpdate();
+        return rs;
     }
     public ArrayList findCourseInstructor (CourseInstructorDTO s) throws SQLException{
         String query="";
