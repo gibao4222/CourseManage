@@ -5,6 +5,7 @@
 package BLL;
 
 import DAL.OnSiteCourseDAL;
+import DTO.OnSiteCourseDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
@@ -16,7 +17,19 @@ public class OnSiteCourseBLL {
     public ArrayList readOnSiteCourse() throws SQLException{
         return s.readOnSiteCourse();
     }
-    public ArrayList readOnSiteCourse1() throws SQLException{
-        return s.readOnSiteCourse1();
+    public ArrayList readStudentOnSiteCourse(int courseID) throws SQLException{
+        return s.readStudentOnSiteCourse(courseID);
+    }
+    public int insertOnSiteCourse(OnSiteCourseDTO osc) throws SQLException{
+        return s.insertOnSiteCourse(osc);
+    }
+    public int deleteOnSiteCourse(int id) throws SQLException{
+        return s.deleteOnSiteCourse(id);
+    }
+    public int updateOnSiteCourse(OnSiteCourseDTO sNew) throws SQLException{
+        return s.updateOnSiteCourse(sNew);
+    }
+    public ArrayList findOnSiteCourse (String str,String value) throws SQLException{
+        return s.findOnSiteCourse(str, value);
     }
 }

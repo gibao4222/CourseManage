@@ -4,11 +4,15 @@
  */
 package GUI;
 
+import Custom.ModernScrollBarUI;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +27,7 @@ public class GUIMain extends javax.swing.JFrame {
     
     public GUIMain() {
         initComponents();
+        this.setTitle("Quản lý khóa học");
     }
     
     private void clickListenerLeftMenu(JPanel panelPara){
@@ -48,11 +53,11 @@ public class GUIMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelSwitch = new javax.swing.JDesktopPane();
         menu1 = new Custom.Menu();
-        lb_QLD = new javax.swing.JLabel();
-        lb_QLPC = new javax.swing.JLabel();
-        lb_QLKH = new javax.swing.JLabel();
+        PanelSwitch = new javax.swing.JDesktopPane();
+        buttonRadius3 = new Custom.ButtonRadius();
+        buttonRadius4 = new Custom.ButtonRadius();
+        buttonRadius5 = new Custom.ButtonRadius();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,43 +65,55 @@ public class GUIMain extends javax.swing.JFrame {
         PanelSwitch.setLayout(PanelSwitchLayout);
         PanelSwitchLayout.setHorizontalGroup(
             PanelSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1056, Short.MAX_VALUE)
+            .addGap(0, 1227, Short.MAX_VALUE)
         );
         PanelSwitchLayout.setVerticalGroup(
             PanelSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
 
-        lb_QLD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lb_QLD.setForeground(new java.awt.Color(255, 255, 255));
-        lb_QLD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_QLD.setText("Quản lý điểm");
-        lb_QLD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lb_QLD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_QLDMouseClicked(evt);
+        buttonRadius3.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRadius3.setText("Quản lý khóa học");
+        buttonRadius3.setBorderColor(new java.awt.Color(0, 153, 255));
+        buttonRadius3.setColor(new java.awt.Color(63, 86, 185));
+        buttonRadius3.setColorClick(new java.awt.Color(0, 102, 204));
+        buttonRadius3.setColorOver(new java.awt.Color(0, 102, 255));
+        buttonRadius3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonRadius3.setRoundBottomLeft(30);
+        buttonRadius3.setRoundTopLeft(30);
+        buttonRadius3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRadius3ActionPerformed(evt);
             }
         });
 
-        lb_QLPC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lb_QLPC.setForeground(new java.awt.Color(255, 255, 255));
-        lb_QLPC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_QLPC.setText("Quản lý phân công");
-        lb_QLPC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lb_QLPC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_QLPCMouseClicked(evt);
+        buttonRadius4.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRadius4.setText("Quản lý điểm");
+        buttonRadius4.setBorderColor(new java.awt.Color(0, 153, 255));
+        buttonRadius4.setColor(new java.awt.Color(63, 86, 185));
+        buttonRadius4.setColorClick(new java.awt.Color(0, 102, 204));
+        buttonRadius4.setColorOver(new java.awt.Color(0, 102, 255));
+        buttonRadius4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonRadius4.setRoundBottomLeft(30);
+        buttonRadius4.setRoundTopLeft(30);
+        buttonRadius4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRadius4ActionPerformed(evt);
             }
         });
 
-        lb_QLKH.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lb_QLKH.setForeground(new java.awt.Color(255, 255, 255));
-        lb_QLKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_QLKH.setText("Quản lý khóa học");
-        lb_QLKH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lb_QLKH.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_QLKHMouseClicked(evt);
+        buttonRadius5.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRadius5.setText("Quản lý phân công");
+        buttonRadius5.setBorderColor(new java.awt.Color(0, 153, 255));
+        buttonRadius5.setColor(new java.awt.Color(63, 86, 185));
+        buttonRadius5.setColorClick(new java.awt.Color(0, 102, 204));
+        buttonRadius5.setColorOver(new java.awt.Color(0, 102, 255));
+        buttonRadius5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonRadius5.setRoundBottomLeft(30);
+        buttonRadius5.setRoundTopLeft(30);
+        buttonRadius5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRadius5ActionPerformed(evt);
             }
         });
 
@@ -104,70 +121,92 @@ public class GUIMain extends javax.swing.JFrame {
         menu1.setLayout(menu1Layout);
         menu1Layout.setHorizontalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_QLD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_QLPC, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                    .addComponent(lb_QLKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu1Layout.createSequentialGroup()
+                .addGap(0, 217, Short.MAX_VALUE)
+                .addComponent(PanelSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addComponent(buttonRadius3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1226, Short.MAX_VALUE)))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addComponent(buttonRadius4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1226, Short.MAX_VALUE)))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(27, 27, 27)
+                    .addComponent(buttonRadius5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1226, Short.MAX_VALUE)))
         );
         menu1Layout.setVerticalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(menu1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(lb_QLKH, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_QLD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_QLPC, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(PanelSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(54, 54, 54)
+                    .addComponent(buttonRadius3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(612, Short.MAX_VALUE)))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(166, 166, 166)
+                    .addComponent(buttonRadius4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(499, Short.MAX_VALUE)))
+            .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menu1Layout.createSequentialGroup()
+                    .addGap(284, 284, 284)
+                    .addComponent(buttonRadius5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(383, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(PanelSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelSwitch)
             .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lb_QLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLKHMouseClicked
+    private void buttonRadius3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRadius3ActionPerformed
+        // TODO add your handling code here:
         try {
             // TODO add your handling code here:
             clickListenerLeftMenu(new QuanLyKhoaHocGUI());
         } catch (SQLException ex) {
             Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_lb_QLKHMouseClicked
+    }//GEN-LAST:event_buttonRadius3ActionPerformed
 
-    private void lb_QLDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLDMouseClicked
+    private void buttonRadius4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRadius4ActionPerformed
+        // TODO add your handling code here:
         try {
             // TODO add your handling code here:
             clickListenerLeftMenu(new QuanLyDiemGUI());
         } catch (SQLException ex) {
             Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_lb_QLDMouseClicked
+    }//GEN-LAST:event_buttonRadius4ActionPerformed
 
-    private void lb_QLPCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_QLPCMouseClicked
+    private void buttonRadius5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRadius5ActionPerformed
+        // TODO add your handling code here:
         try {
             // TODO add your handling code here:
             clickListenerLeftMenu(new QuanLyPhanCongGUI());
         } catch (SQLException ex) {
             Logger.getLogger(GUIMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_lb_QLPCMouseClicked
+    }//GEN-LAST:event_buttonRadius5ActionPerformed
 
     
     /**
@@ -197,6 +236,8 @@ public class GUIMain extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        UIDefaults ui = UIManager.getDefaults();
+        ui.put("ScrollBarUI", ModernScrollBarUI.class.getCanonicalName());
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -207,9 +248,9 @@ public class GUIMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane PanelSwitch;
-    private javax.swing.JLabel lb_QLD;
-    private javax.swing.JLabel lb_QLKH;
-    private javax.swing.JLabel lb_QLPC;
+    private Custom.ButtonRadius buttonRadius3;
+    private Custom.ButtonRadius buttonRadius4;
+    private Custom.ButtonRadius buttonRadius5;
     private Custom.Menu menu1;
     // End of variables declaration//GEN-END:variables
 }

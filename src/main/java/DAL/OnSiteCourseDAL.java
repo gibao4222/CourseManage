@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import Custom.Model_Card;
 import DTO.OnSiteCourseDTO;
 import DTO.OnlineCourseDTO;
 import java.sql.PreparedStatement;
@@ -21,18 +22,19 @@ public class OnSiteCourseDAL extends connect{
         super();
         this.openConnection();
     }
-    public ArrayList readOnSiteCourse1() throws SQLException{
-        String query = "SELECT onsitecourse.CourseID, Title, Credits, Name FROM `onsitecourse`, `course`, `department`  WHERE  onsitecourse.CourseID = course.CourseID AND Department.DepartmentID = course.DepartmentID";
-        ResultSet rs = this.doReadQuery(query);
+    public ArrayList readStudentOnSiteCourse(int courseID) throws SQLException{
+        String query = "SELECT PersonID, CONCAT(Lastname,' ',Firstname) AS FullName, Grade FROM course, studentgrade, person WHERE course.CourseID = studentgrade.CourseID AND person.PersonID =studentgrade.StudentID AND studentgrade.CourseID=?";
+        PreparedStatement p=con.prepareStatement(query); 
+        p.setInt(1, courseID);
+        ResultSet rs = p.executeQuery();
         ArrayList List = new ArrayList();
         if(rs!=null)
         {
             while(rs.next()){
-                Object[] s = new Object[4];
-                s[0]=(rs.getInt("CourseID"));
-                s[1]=(rs.getString("Title"));
-                s[2]=(rs.getString("Credits"));
-                s[3]=(rs.getString("Name"));
+                Model_Card s = new Model_Card();
+                s.setId((rs.getInt("PersonID")));
+                s.setPersonName(rs.getString("FullName"));
+                s.setGrade(rs.getDouble("Grade"));
                 List.add(s);
             }
         }
@@ -77,38 +79,37 @@ public class OnSiteCourseDAL extends connect{
         int rs = p.executeUpdate();
         return rs;
     }
-    public int deleteOnlineCourse(OnSiteCourseDTO s) throws SQLException{
+    public int deleteOnSiteCourse(int id) throws SQLException{
         String query = "DELETE FROM onsitecourse WHERE CourseID=?";
         PreparedStatement p = con.prepareStatement(query);
-        p.setInt(1, s.getCourseID());
+        p.setInt(1, id);
         int rs = p.executeUpdate();
         return rs;
     }
-    public ArrayList findOnlineCourse (int courseaID,String title, String location) throws SQLException{
+    public ArrayList findOnSiteCourse (String str,String value) throws SQLException{
         String query="";
         PreparedStatement p = null;
-        if(courseaID!=0){
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND course.CourseID=?";
+        if(str.equals("Mã khóa học")){
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND onsitecourse.CourseID LIKE ?";
             p=con.prepareStatement(query); 
-            p.setInt(1, courseaID);
+            p.setString(1, "%"+value+"%");
         }
-        else if(!title.equals("") && location.equals("")){
+        else if(str.equals("Tên khóa học")){
             query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND course.Title LIKE ?";
             p=con.prepareStatement(query); 
-            p.setString(1, "%"+title+"%");
+            p.setString(1, "%"+value+"%");
         }
-        else if(title.equals("") && !location.equals("")){
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND Location LIKE ?";
+        else if(str.equals("Số tín chỉ")){
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND Credits=?";
             p=con.prepareStatement(query); 
-            p.setString(1, "%"+location+"%");
+            p.setInt(1, Integer.parseInt(value));
         }
         else{
-            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse` WHERE course.CourseID=onsitecourse.CourseID AND onsitecourse.Location LIKE ? AND course.Title LIKE ?";
+            query = "SELECT onsitecourse.CourseID, Title, Location, Days, Time FROM `course`, `onsitecourse`, `department`  WHERE course.CourseID=onsitecourse.CourseID AND course.DepartmentID = department.DepartmentID AND department.Name LIKE ?";
             p=con.prepareStatement(query); 
-            p.setString(1, "%"+location+"%");
-            p.setString(2, "%"+title+"%");
+            p.setString(1, "%"+value+"%");
         }
-         ResultSet rs = p.executeQuery();
+        ResultSet rs = p.executeQuery();
         ArrayList List = new ArrayList();
         if(rs!=null){
             while(rs.next()){
@@ -117,7 +118,7 @@ public class OnSiteCourseDAL extends connect{
                 s.setTitle(rs.getString("Title"));
                 s.setLocation(rs.getString("Location"));
                 s.setDays(rs.getString("Days"));
-                s.setTime(rs.getTime(title));
+                s.setTime(rs.getTime("Time"));
                 List.add(s);
             }
         }

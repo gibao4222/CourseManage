@@ -5,6 +5,7 @@
 package BLL;
 
 import DAL.OnlineCourseDAL;
+import DTO.OnlineCourseDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
@@ -16,7 +17,19 @@ public class OnlineCourseBLL {
     public ArrayList readOnlineCourse() throws SQLException{
         return s.readOnlineCourse();
     }
-    public ArrayList readOnlineCourse1() throws SQLException{
-        return s.readOnlineCourse1();
-    }       
+    public ArrayList readStudentOnlineCourse(int courseID) throws SQLException{
+        return s.readStudentOnlineCourse(courseID);
+    }   
+    public int insertOnlineCourse(OnlineCourseDTO oc) throws SQLException{
+        return s.insertOnlineCourse(oc);
+    }
+    public int deleteOnlineCourse(int id) throws SQLException{
+        return s.deleteOnlineCourse(id);
+    }
+    public int updateOnlineCourse(OnlineCourseDTO sNew) throws SQLException{
+        return s.updateOnlineCourse(sNew);
+    }
+    public ArrayList findOnlineCourse (String str, String value) throws SQLException{
+        return s.findOnlineCourse(str, value);
+    }
 }
