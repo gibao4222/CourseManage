@@ -562,9 +562,9 @@
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btn_Add" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_Delete" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_Update" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_Add" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btn_Delete" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btn_Update" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>

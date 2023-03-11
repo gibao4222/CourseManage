@@ -223,16 +223,9 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
             panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelRadius3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRadius1Layout.createSequentialGroup()
-                .addGroup(panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(45, 45, 45)
+                .addGroup(panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRadius1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRadius1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
                         .addGroup(panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbTenGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,8 +236,14 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
                             .addComponent(cbbTenKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel3)
-                            .addComponent(txtMaKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                            .addComponent(txtMaKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelRadius1Layout.createSequentialGroup()
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         panelRadius1Layout.setVerticalGroup(
             panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,9 +446,11 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        if(jTable1.getSelectionModel().isSelectionEmpty() == true)
+        int confirm =JOptionPane.showConfirmDialog(this,"Would you like to delete this course?","Confirm",JOptionPane.YES_NO_OPTION);
+        if(confirm==JOptionPane.YES_OPTION){
+          if(jTable1.getSelectionModel().isSelectionEmpty() == true)
             JOptionPane.showMessageDialog(btnThem, "Vui lòng chọn khóa học để xóa");
-        else{
+            else{
             try {
             // TODO add your handling code here:
                 CourseInstructorDTO ci = new CourseInstructorDTO();
@@ -465,7 +466,9 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }  
         }
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     CourseInstructorDTO sOld = new CourseInstructorDTO();
