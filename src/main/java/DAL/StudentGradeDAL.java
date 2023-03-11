@@ -21,7 +21,7 @@ public class StudentGradeDAL extends connect {
         this.openConnection();
     }
     public ArrayList readStudentGrade() throws SQLException{
-        String query = "SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID";
+        String query = "SELECT EnrollmentID,studentgrade.CourseID,StudentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID ORDER BY EnrollmentID ASC";
         ResultSet rs = this.doReadQuery(query);
         ArrayList List = new ArrayList();
         if(rs!=null)
@@ -29,6 +29,8 @@ public class StudentGradeDAL extends connect {
             while(rs.next()){
                 StudentGradeDTO s = new StudentGradeDTO();
                 s.setEnrollmentID(rs.getInt("EnrollmentID"));
+                s.setCourseID(rs.getInt("CourseID"));
+                s.setStudentID(rs.getInt("StudentID"));
                 s.setCourseName(rs.getString("Title"));
                 s.setFullNameStudent(rs.getString("FullName"));
                 s.setGrade(rs.getDouble("Grade"));
@@ -36,6 +38,56 @@ public class StudentGradeDAL extends connect {
             }
         }
         return List;
+        }
+    public ArrayList readNameStudentGrade() throws SQLException{
+        String query = "SELECT DISTINCT concat(person.Firstname,' ',person.Lastname) as FullName FROM person,studentgrade WHERE person.PersonID = studentgrade.StudentID";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getString(1));
+            }
+        }
+        return List;
+    }
+    
+    public int getIdStudentFromFullname(String name) throws SQLException{
+        String query = String.format("SELECT person.PersonID FROM person WHERE person.Firstname IN (SELECT\n" +
+"    SUBSTRING_INDEX(SUBSTRING_INDEX('%s' , ' ', 1), ' ', -1) AS first_name)\n" +
+"    AND person.Lastname IN (SELECT TRIM( SUBSTR('%s ', LOCATE(' ', '%s' )) ) AS last_name)",name,name,name );
+        ResultSet rs = this.doReadQuery(query);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else
+            return 0;
+    }
+        
+    public ArrayList readNameCourseGrade() throws SQLException{
+        String query = "SELECT course.Title from course";
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getString(1));
+            }
+        }
+        return List;
+    }
+    public int getIdCourseGrade(String name) throws SQLException{
+        String query = String.format("SELECT course.CourseID from course WHERE course.Title = '%s' ",name);
+        ResultSet rs = this.doReadQuery(query);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else
+            return 0;
     }
     public int updateStudent(StudentGradeDTO s) throws SQLException{
         String query ="UPDATE studentgrade SET CourseID = (SELECT CourseID FROM course WHERE Title = ?), StudentID = (SELECT PersonID FROM person WHERE CONCAT(FirstName,' ',LastName) = ?), Grade = ? WHERE EnrollmentID=?";
@@ -56,57 +108,28 @@ public class StudentGradeDAL extends connect {
         int rs = p.executeUpdate();
         return rs;
     }
-    public ArrayList findStudent (int enrollmentID, String fullName, String title, double gradeTo, double gradeCome) throws SQLException{
+    public ArrayList findStudentGrade (String str, String value) throws SQLException{
         String query="";
         PreparedStatement p;
-        if(enrollmentID != 0){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND EnrollmentID=?";
+        if(str.equals("Mã sinh viên")){
+            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND studentgrade.StudentID LIKE ?";
             p = con.prepareStatement(query);
-            p.setInt(1, enrollmentID);
+            p.setString(1, "%"+value+"%");
         }
-        else if(!fullName.equals("") && title.equals("") && gradeCome==-1){
+        else if(str.equals("Mã khóa học")){
+            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND studentgrade.CourseID LIKE ?";
+            p = con.prepareStatement(query);
+            p.setString(1, "%"+value+"%");
+        }
+        else if(str.equals("Tên sinh viên")){
             query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND CONCAT(FirstName,' ',LastName) LIKE ?";
             p = con.prepareStatement(query);
-            p.setString(1, "%"+fullName+"%");
-        }
-        else if(fullName.equals("") && !title.equals("") && gradeCome==-1){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND Title LIKE ?";
-            p = con.prepareStatement(query);
-            p.setString(1, "%"+title+"%");
-        }
-        else if(fullName.equals("") && title.equals("") && gradeCome!=-1){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND ?<= Grade <=?";
-            p = con.prepareStatement(query);
-            p.setDouble(1, gradeTo);
-            p.setDouble(2, gradeCome);
-        }
-        else if(!fullName.equals("") && !title.equals("") && gradeCome==-1){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND CONCAT(FirstName,' ',LastName) LIKE ? AND Title LIKE ?";
-            p = con.prepareStatement(query);
-            p.setString(1, "%"+fullName+"%");
-            p.setString(2,"%"+title+"%");
-        }
-        else if(!fullName.equals("") && title.equals("") && gradeCome!=-1){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND CONCAT(FirstName,' ',LastName) LIKE ? AND ? <= Grade <=?";
-            p = con.prepareStatement(query);
-            p.setString(1, "%"+fullName+"%");
-            p.setDouble(2,gradeTo);
-            p.setDouble(3, gradeCome);
-        }
-        else if(fullName.equals("") && !title.equals("") && gradeCome!=-1){
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND ? <= Grade <=? AND Title LIKE ?";
-            p = con.prepareStatement(query);
-            p.setDouble(1,gradeTo );
-            p.setDouble(2,gradeCome );
-            p.setString(2,"%"+title+"%");
+            p.setString(1, "%"+value+"%");
         }
         else{
-            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND CONCAT(FirstName,' ',LastName) LIKE ? AND ?<= Grade <=? AND Title LIKE ?";
+            query ="SELECT EnrollmentID, CONCAT(FirstName,' ',LastName) AS FullName, Title, Grade FROM `studentgrade`, `course`, `person` WHERE course.CourseID = studentgrade.CourseID AND person.PersonID = studentgrade.StudentID AND Title LIKE ?";
             p = con.prepareStatement(query);
-            p.setString(1, fullName);
-            p.setDouble(2,gradeTo );
-            p.setDouble(3,gradeCome );
-            p.setString(4,"%"+title+"%");
+            p.setString(4,"%"+value+"%");
         }
         ResultSet rs = p.executeQuery();
         ArrayList List = new ArrayList();
