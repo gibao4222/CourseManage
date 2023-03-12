@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import BLL.CourseBLL;
+import java.awt.Dimension;
 import BLL.CourseInstructorBLL;
 import DTO.CourseInstructorDTO;
 import java.sql.SQLException;
@@ -13,6 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +30,7 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
      * Creates new form QuanLyPhanCongGUI
      */
     CourseInstructorBLL s = new CourseInstructorBLL();
+    CourseBLL sBll = new CourseBLL();
     DefaultTableModel model;
     public QuanLyPhanCongGUI() throws SQLException {
         initComponents();
@@ -44,9 +50,35 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JDialog_OnSiteCourse = new javax.swing.JDialog();
+        dgoc_txt_IDCourse = new javax.swing.JLabel();
+        dgoc_txt_courseName = new javax.swing.JLabel();
+        dgoc_txt_credits = new javax.swing.JLabel();
+        dgoc_txt_idDepartment = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        dialog_id = new javax.swing.JLabel();
+        dialog_name = new javax.swing.JLabel();
+        dialog_credit = new javax.swing.JLabel();
+        dialog_idDepart = new javax.swing.JLabel();
+        dialog_location = new javax.swing.JLabel();
+        dialog_days = new javax.swing.JLabel();
+        dialog_time = new javax.swing.JLabel();
+        jDialog_OnlineCourse = new javax.swing.JDialog();
+        dgosc_txt_IDCourse = new javax.swing.JLabel();
+        dgosc_txt_courseName = new javax.swing.JLabel();
+        dgosc_txt_credits = new javax.swing.JLabel();
+        dgosc_txt_idDepartment = new javax.swing.JLabel();
+        dgosc_txt_Location = new javax.swing.JLabel();
+        dialog_OnlineId = new javax.swing.JLabel();
+        dialog_onlineName = new javax.swing.JLabel();
+        dialog_onlineCredit = new javax.swing.JLabel();
+        dialog_onlineDep = new javax.swing.JLabel();
+        dialog_onlineUrl = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         cbb_TimKiem = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         panelRadius1 = new Custom.PanelRadius();
@@ -63,6 +95,166 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         btnThem = new Custom.ButtonRadius();
         btnSua = new Custom.ButtonRadius();
         btnXoa = new Custom.ButtonRadius();
+
+        JDialog_OnSiteCourse.setBackground(new java.awt.Color(255, 255, 255));
+        JDialog_OnSiteCourse.setSize(new Dimension(407,253));
+
+        dgoc_txt_IDCourse.setText("ID Course:");
+
+        dgoc_txt_courseName.setText("Name Course:");
+
+        dgoc_txt_credits.setText("Creadits:");
+
+        dgoc_txt_idDepartment.setText("ID Department:");
+
+        jLabel1.setText("Location:");
+
+        jLabel7.setText("Days");
+
+        jLabel8.setText("Time: ");
+
+        dialog_id.setText("id");
+
+        dialog_name.setText("name");
+
+        dialog_credit.setText("credits");
+
+        dialog_idDepart.setText("idDepart");
+
+        dialog_location.setText("location");
+
+        dialog_days.setText("day");
+
+        dialog_time.setText("time");
+
+        javax.swing.GroupLayout JDialog_OnSiteCourseLayout = new javax.swing.GroupLayout(JDialog_OnSiteCourse.getContentPane());
+        JDialog_OnSiteCourse.getContentPane().setLayout(JDialog_OnSiteCourseLayout);
+        JDialog_OnSiteCourseLayout.setHorizontalGroup(
+            JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JDialog_OnSiteCourseLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(dgoc_txt_courseName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dgoc_txt_credits, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dgoc_txt_idDepartment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(dgoc_txt_IDCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dialog_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_credit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_idDepart, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addComponent(dialog_location, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_days, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
+        );
+        JDialog_OnSiteCourseLayout.setVerticalGroup(
+            JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JDialog_OnSiteCourseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgoc_txt_IDCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_id))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgoc_txt_courseName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_name))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgoc_txt_credits, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_credit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgoc_txt_idDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_idDepart))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_location))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_days))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JDialog_OnSiteCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_time))
+                .addContainerGap())
+        );
+
+        jDialog_OnlineCourse.setBackground(new java.awt.Color(255, 255, 255));
+        jDialog_OnlineCourse.setSize(new Dimension(407,340));
+
+        dgosc_txt_IDCourse.setText("ID Course:");
+
+        dgosc_txt_courseName.setText("Name Course:");
+
+        dgosc_txt_credits.setText("Credits:");
+
+        dgosc_txt_idDepartment.setText("ID Department:");
+
+        dgosc_txt_Location.setText("URL: ");
+
+        dialog_OnlineId.setText("onlineId");
+
+        dialog_onlineName.setText("onlineName");
+
+        dialog_onlineCredit.setText("onlineCredit");
+
+        dialog_onlineDep.setText("onlineIdDep");
+
+        dialog_onlineUrl.setText("onlineUrl");
+
+        javax.swing.GroupLayout jDialog_OnlineCourseLayout = new javax.swing.GroupLayout(jDialog_OnlineCourse.getContentPane());
+        jDialog_OnlineCourse.getContentPane().setLayout(jDialog_OnlineCourseLayout);
+        jDialog_OnlineCourseLayout.setHorizontalGroup(
+            jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_OnlineCourseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(dgosc_txt_idDepartment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(dgosc_txt_credits, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dgosc_txt_courseName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dgosc_txt_IDCourse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dgosc_txt_Location, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dialog_onlineName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_OnlineId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_onlineCredit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dialog_onlineDep, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(dialog_onlineUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+        jDialog_OnlineCourseLayout.setVerticalGroup(
+            jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_OnlineCourseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgosc_txt_IDCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_OnlineId))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgosc_txt_courseName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_onlineName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgosc_txt_credits, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_onlineCredit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgosc_txt_idDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_onlineDep))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog_OnlineCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dgosc_txt_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dialog_onlineUrl))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setBackground(new java.awt.Color(222, 229, 238));
 
@@ -83,7 +275,7 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,18 +286,18 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
                 "Mã giảng viên", "Tên giảng viên", "Mã khóa học", "Tên khóa học"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tableMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTable1MouseEntered(evt);
+                tableMouseEntered(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setResizable(false);
         }
 
         cbb_TimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên giảng viên", "Tên khóa học", "Mã giảng viên", "Mã khóa học" }));
@@ -231,7 +423,7 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
                             .addComponent(txtMaGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
-                        .addGap(94, 94, 94)
+                        .addGap(109, 109, 109)
                         .addGroup(panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbTenKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
@@ -241,9 +433,9 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         panelRadius1Layout.setVerticalGroup(
             panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,6 +524,9 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTimKiemKeyTyped
 
+    
+    
+    
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
         
@@ -372,19 +567,57 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        model = (DefaultTableModel) jTable1.getModel();
-        int i = jTable1.getSelectedRow();
-        if(i>=0){
-            sOld.setCourseID(Integer.parseInt(model.getValueAt(i, 1).toString()));
-            sOld.setPersonID(Integer.parseInt(model.getValueAt(i, 3).toString()));
-            txtMaGiangVien.setText(model.getValueAt(i, 3).toString());
-            cbbTenGiangVien.setSelectedItem(model.getValueAt(i, 4).toString());
-            cbbTenKhoaHoc.setSelectedItem(model.getValueAt(i, 2).toString());
-            txtMaKhoaHoc.setText(model.getValueAt(i, 1).toString());
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        try {
+            // TODO add your handling code here:
+            model = (DefaultTableModel) table.getModel();
+            int i = table.getSelectedRow();
+            if(i>=0){
+                sOld.setCourseID(Integer.parseInt(model.getValueAt(i, 1).toString()));
+                sOld.setPersonID(Integer.parseInt(model.getValueAt(i, 3).toString()));
+                txtMaGiangVien.setText(model.getValueAt(i, 3).toString());
+                cbbTenGiangVien.setSelectedItem(model.getValueAt(i, 4).toString());
+                cbbTenKhoaHoc.setSelectedItem(model.getValueAt(i, 2).toString());
+                txtMaKhoaHoc.setText(model.getValueAt(i, 1).toString());
+            }
+            JTable source = (JTable)evt.getSource();
+            int columnindex = table.getSelectedColumn();
+            int row = source.rowAtPoint( evt.getPoint() );
+            int column = source.columnAtPoint( evt.getPoint() );
+            //            JOptionPane.showMessageDialog(null, temp);
+            switch (columnindex) {
+                case 1:
+                    String temp = source.getModel().getValueAt(row, column)+"";
+//                JOptionPane.showMessageDialog(null, temp);
+                    ArrayList ListOnsite = sBll.getCourseAndOnsiteCourseById(Integer.parseInt(temp));
+                    if(ListOnsite.isEmpty()){
+                        ArrayList ListOnline = sBll.getCourseAndOnlinesiteCourseById(Integer.parseInt(temp));
+                        dialog_OnlineId.setText(ListOnline.get(0).toString());
+                        dialog_onlineName.setText(ListOnline.get(1).toString());
+                        dialog_onlineCredit.setText(ListOnline.get(2).toString());
+                        dialog_onlineDep.setText(ListOnline.get(3).toString());
+                        dialog_onlineUrl.setText(ListOnline.get(4).toString());
+                        jDialog_OnlineCourse.show();
+                    }
+                    else{
+                        dialog_id.setText(ListOnsite.get(0).toString());
+                        dialog_name.setText(ListOnsite.get(1).toString());
+                        dialog_credit.setText(ListOnsite.get(2).toString());
+                        dialog_idDepart.setText(ListOnsite.get(3).toString());
+                        dialog_location.setText(ListOnsite.get(4).toString());
+                        dialog_days.setText(ListOnsite.get(5).toString());
+                        dialog_time.setText(ListOnsite.get(6).toString());
+                        JDialog_OnSiteCourse.show();
+                    }
+                    
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyPhanCongGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
     private void cbbTenGiangVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTenGiangVienActionPerformed
         // TODO add your handling code here:
@@ -422,10 +655,10 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+    private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTable1MouseEntered
+    }//GEN-LAST:event_tableMouseEntered
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
@@ -448,7 +681,7 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         int confirm =JOptionPane.showConfirmDialog(this,"Would you like to delete this course?","Confirm",JOptionPane.YES_NO_OPTION);
         if(confirm==JOptionPane.YES_OPTION){
-          if(jTable1.getSelectionModel().isSelectionEmpty() == true)
+          if(table.getSelectionModel().isSelectionEmpty() == true)
             JOptionPane.showMessageDialog(btnThem, "Vui lòng chọn khóa học để xóa");
             else{
             try {
@@ -516,52 +749,78 @@ public class QuanLyPhanCongGUI extends javax.swing.JPanel {
         CourseInstructorDTO ci = new CourseInstructorDTO(0,0,"",name);
         ArrayList list = s.findCourseInstructor(ci);
         DefaultTableModel model = convertCI(list);
-        jTable1.setModel(model);
+        table.setModel(model);
     }
     
     private void findNameCourse(String name) throws SQLException{
         CourseInstructorDTO ci = new CourseInstructorDTO(0,0,name,"");
         ArrayList list = s.findCourseInstructor(ci);
         DefaultTableModel model = convertCI(list);
-        jTable1.setModel(model);
+        table.setModel(model);
     }
     
     private void findIdInstructor(String name) throws SQLException{
         CourseInstructorDTO ci = new CourseInstructorDTO(0,Integer.parseInt(name),"","");
         ArrayList list = s.findCourseInstructor(ci);
         DefaultTableModel model = convertCI(list);
-        jTable1.setModel(model);
+        table.setModel(model);
     }
     
     private void findIdCourse(String name) throws SQLException{
         CourseInstructorDTO ci = new CourseInstructorDTO(Integer.parseInt(name),0,"","");
         ArrayList list = s.findCourseInstructor(ci);
         DefaultTableModel model = convertCI(list);
-        jTable1.setModel(model);
+        table.setModel(model);
     }
     
     private void listCI() throws SQLException{
         ArrayList list = s.readCourseInstructor();
         DefaultTableModel model = convertCI(list);
-        jTable1.setModel(model);
+        table.setModel(model);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog JDialog_OnSiteCourse;
     private Custom.ButtonRadius btnSua;
     private Custom.ButtonRadius btnThem;
     private Custom.ButtonRadius btnXoa;
     private javax.swing.JComboBox<String> cbbTenGiangVien;
     private javax.swing.JComboBox<String> cbbTenKhoaHoc;
     private javax.swing.JComboBox<String> cbb_TimKiem;
+    private javax.swing.JLabel dgoc_txt_IDCourse;
+    private javax.swing.JLabel dgoc_txt_courseName;
+    private javax.swing.JLabel dgoc_txt_credits;
+    private javax.swing.JLabel dgoc_txt_idDepartment;
+    private javax.swing.JLabel dgosc_txt_IDCourse;
+    private javax.swing.JLabel dgosc_txt_Location;
+    private javax.swing.JLabel dgosc_txt_courseName;
+    private javax.swing.JLabel dgosc_txt_credits;
+    private javax.swing.JLabel dgosc_txt_idDepartment;
+    private javax.swing.JLabel dialog_OnlineId;
+    private javax.swing.JLabel dialog_credit;
+    private javax.swing.JLabel dialog_days;
+    private javax.swing.JLabel dialog_id;
+    private javax.swing.JLabel dialog_idDepart;
+    private javax.swing.JLabel dialog_location;
+    private javax.swing.JLabel dialog_name;
+    private javax.swing.JLabel dialog_onlineCredit;
+    private javax.swing.JLabel dialog_onlineDep;
+    private javax.swing.JLabel dialog_onlineName;
+    private javax.swing.JLabel dialog_onlineUrl;
+    private javax.swing.JLabel dialog_time;
+    private javax.swing.JDialog jDialog_OnlineCourse;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private Custom.PanelRadius panelRadius1;
     private Custom.PanelRadius panelRadius3;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtMaGiangVien;
     private javax.swing.JTextField txtMaKhoaHoc;
     private javax.swing.JTextField txtTimKiem;

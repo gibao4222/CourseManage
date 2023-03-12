@@ -127,4 +127,44 @@ public class CourseDAL extends connect{
         int rs = p.executeUpdate();
         return rs;
     }
+    
+    public ArrayList getCourseAndOnsiteCourseById(int id) throws SQLException{
+        String query = String.format("SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.Location,onsitecourse.Days,onsitecourse.Time FROM course,onsitecourse WHERE course.CourseID = %d AND onsitecourse.CourseID = %d", id,id);
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getInt(1));
+                List.add(rs.getString(2));
+                List.add(rs.getInt(3));
+                List.add(rs.getInt(4));
+                List.add(rs.getString(5));
+                List.add(rs.getString(6));
+                List.add(rs.getTime(7));
+            }
+        }
+        return List;
+    }
+    
+    public ArrayList getCourseAndOnlinesiteCourseById(int id) throws SQLException{
+        String query = String.format("SELECT course.CourseID, course.Title,course.Credits,course.DepartmentID, onlinecourse.url from course,onlinecourse WHERE course.CourseID = %d AND onlinecourse.CourseID = %d", id,id);
+        ResultSet rs = this.doReadQuery(query);
+        ArrayList List = new ArrayList();
+        if(rs!=null)
+        {
+            while(rs.next()){
+//                CourseInstructorDTO s = new CourseInstructorDTO();
+//                s.setFullName(rs.getString("FullName"));
+                List.add(rs.getInt(1));
+                List.add(rs.getString(2));
+                List.add(rs.getInt(3));
+                List.add(rs.getInt(4));
+                List.add(rs.getString(5));
+            }
+        }
+        return List;
+    }
 }

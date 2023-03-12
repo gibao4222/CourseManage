@@ -1,6 +1,282 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JDialog" name="JDialog_OnSiteCourse">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JDialog_OnSiteCourse.setSize(new Dimension(407,253));"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="dgoc_txt_courseName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dgoc_txt_credits" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dgoc_txt_idDepartment" alignment="0" pref="99" max="32767" attributes="0"/>
+                      <Component id="dgoc_txt_IDCourse" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="dialog_id" max="32767" attributes="0"/>
+                      <Component id="dialog_name" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dialog_credit" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dialog_idDepart" alignment="0" pref="62" max="32767" attributes="0"/>
+                      <Component id="dialog_location" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dialog_days" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dialog_time" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="205" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgoc_txt_IDCourse" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_id" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgoc_txt_courseName" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_name" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgoc_txt_credits" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_credit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgoc_txt_idDepartment" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_idDepart" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="dialog_location" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_days" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="dialog_time" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="dgoc_txt_IDCourse">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID Course:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgoc_txt_courseName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Name Course:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgoc_txt_credits">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Creadits:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgoc_txt_idDepartment">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID Department:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Location:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Days"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Time: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_id">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="id"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_name">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_credit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="credits"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_idDepart">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="idDepart"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_location">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="location"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_days">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="day"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_time">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="time"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jDialog_OnlineCourse">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jDialog_OnlineCourse.setSize(new Dimension(407,340));"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="dgosc_txt_idDepartment" alignment="0" pref="105" max="32767" attributes="0"/>
+                      <Component id="dgosc_txt_credits" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dgosc_txt_courseName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dgosc_txt_IDCourse" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dgosc_txt_Location" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="dialog_onlineName" max="32767" attributes="0"/>
+                      <Component id="dialog_OnlineId" max="32767" attributes="0"/>
+                      <Component id="dialog_onlineCredit" max="32767" attributes="0"/>
+                      <Component id="dialog_onlineDep" pref="100" max="32767" attributes="0"/>
+                      <Component id="dialog_onlineUrl" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="172" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgosc_txt_IDCourse" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_OnlineId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgosc_txt_courseName" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_onlineName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgosc_txt_credits" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_onlineCredit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgosc_txt_idDepartment" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="dialog_onlineDep" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="dgosc_txt_Location" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="dialog_onlineUrl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="dgosc_txt_IDCourse">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID Course:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgosc_txt_courseName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Name Course:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgosc_txt_credits">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Credits:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgosc_txt_idDepartment">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID Department:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dgosc_txt_Location">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="URL: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_OnlineId">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="onlineId"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_onlineName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="onlineName"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_onlineCredit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="onlineCredit"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_onlineDep">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="onlineIdDep"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dialog_onlineUrl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="onlineUrl"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ee" green="e5" red="de" type="rgb"/>
@@ -80,7 +356,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="table">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -119,8 +395,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseEntered"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableMouseEntered"/>
           </Events>
         </Component>
       </SubComponents>
@@ -163,14 +439,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbbTenGiangVien" min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="txtMaGiangVien" min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbbTenKhoaHoc" min="-2" pref="103" max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -178,15 +454,15 @@
                               <Component id="txtMaKhoaHoc" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="btnThem" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="btnSua" min="-2" pref="91" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                           <Component id="btnXoa" min="-2" pref="91" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

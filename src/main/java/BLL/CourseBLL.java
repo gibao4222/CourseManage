@@ -15,4 +15,12 @@ public class CourseBLL {
     public ArrayList readCourse() throws SQLException{
         return s.readCourse();
     }
+    
+    public ArrayList getCourseAndOnsiteCourseById(int id) throws SQLException{
+        return s.getCourseAndOnsiteCourseById(id);
+    }
+    
+    public ArrayList getCourseAndOnlinesiteCourseById(int id) throws SQLException{
+        return s.getCourseAndOnlinesiteCourseById(id);
+    }
 }
